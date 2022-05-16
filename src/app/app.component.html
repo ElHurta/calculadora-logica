@@ -1,17 +1,25 @@
 <section class="main-section">
     <div class="container">
       <div class="left-container">
-        <textarea readonly name="calcInput">{{ actualInput }}</textarea>
+        <textarea readonly name="calcInput" [ngClass]="{'alert-text' : !symbolFound}">{{ actualInput }}</textarea>
+        <p *ngIf="!symbolFound"
+          style="color: red">
+          Simbolo Incorrecto Ingresado
+        </p>
         <div class="buttons-container">
-          <button (click)="typeInput($event)" value="P">P</button>
-          <button (click)="typeInput($event)" value="Q">Q</button>
-          <button (click)="typeInput($event)" value="R">R</button>
+          <button
+            *ngFor="let symbol of currentSimbols"
+            value="{{ symbol.value }}"
+            (click)="typeInput($event)">
+            {{ symbol.value }}
+          </button>
 
-          <button (click)="typeInput($event)" value="Λ">&and;</button>
-          <button (click)="typeInput($event)" value="∨">&or;</button>
-          <button (click)="typeInput($event)" value="⊻">&veebar;</button>
-          <button (click)="typeInput($event)" value="(">(</button>
-          <button (click)="typeInput($event)" value=")">)</button>
+          <button (click)="typeInput($event)" value="A">A</button>
+          <button (click)="typeInput($event)" value="B">B</button>
+          <button (click)="typeInput($event)" value="C">C</button>
+          <button (click)="typeInput($event)" value="D">D</button>
+
+          <button (click)="deleteChar()">Delete</button>
         </div>
         <button (click)="showSimbols()">Show simbols</button>
       </div>
